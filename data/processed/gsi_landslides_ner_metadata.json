@@ -1,0 +1,48 @@
+{
+  "dataset_name": "GSI Historical Landslide Inventory \u2014 North Eastern Region (NER)",
+  "source": "Geological Survey of India (GSI) Historical Landslide Inventory PDF",
+  "crs": "EPSG:4326",
+  "record_count": 11025,
+  "columns": [
+    "page_num",
+    "sl_no",
+    "slide_id",
+    "state",
+    "district",
+    "slide_name",
+    "road_location",
+    "latitude",
+    "longitude",
+    "material_involved",
+    "movement_type",
+    "history",
+    "state_clean",
+    "lat_num",
+    "lon_num",
+    "coord_missing",
+    "coord_swapped",
+    "coord_impossible",
+    "outside_india",
+    "outside_ner_bbox",
+    "is_valid_coord",
+    "geometry"
+  ],
+  "ner_states": [
+    "Arunachal Pradesh",
+    "Assam",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Sikkim",
+    "Tripura"
+  ],
+  "bounding_box": [
+    87.8,
+    21.9,
+    97.4,
+    29.5
+  ],
+  "processing_pipeline": "PDF Table Extraction -> String Cleaning -> Coordinate Parsing/Validation -> State Normalization -> Geospatial Export",
+  "scientific_note": "Records represent historical positive landslide location observations. History dates are preserved where present but no event dates or IMERG rainfall linkages have been fabricated."
+}

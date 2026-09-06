@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-09-04 00:37:33",
+  "elapsed_seconds": 12.76,
+  "total_samples": 22050,
+  "positive_landslides": 11025,
+  "background_controls": 11025,
+  "class_balance_ratio": 1.0,
+  "spatial_blocks_count": 413,
+  "audit_sampling_stats": {
+    "total_target_controls": 11025,
+    "controls_generated": 11025,
+    "candidate_attempts": 11265,
+    "rejected_uncovered_dem": 0,
+    "rejected_exclusion_buffer": 240,
+    "rejected_nodata_terrain": 0,
+    "exclusion_distance_m": 500.0,
+    "random_seed": 42,
+    "state_breakdown": {
+      "Mizoram": {
+        "target": 3487,
+        "generated": 3487,
+        "attempts": 3584
+      },
+      "Nagaland": {
+        "target": 1902,
+        "generated": 1902,
+        "attempts": 1939
+      },
+      "Manipur": {
+        "target": 1631,
+        "generated": 1631,
+        "attempts": 1669
+      },
+      "Arunachal Pradesh": {
+        "target": 1223,
+        "generated": 1223,
+        "attempts": 1231
+      },
+      "Meghalaya": {
+        "target": 1052,
+        "generated": 1052,
+        "attempts": 1065
+      },
+      "Assam": {
+        "target": 856,
+        "generated": 856,
+        "attempts": 871
+      },
+      "Sikkim": {
+        "target": 777,
+        "generated": 777,
+        "attempts": 809
+      },
+      "Tripura": {
+        "target": 97,
+        "generated": 97,
+        "attempts": 97
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "phase": "Phase 6 \u2014 Dynamic Environmental Data Processing",
+  "timestamp": "2026-09-05",
+  "imerg_rainfall": {
+    "discovered_files": 96,
+    "valid_files": 96,
+    "invalid_corrupt_files": 0,
+    "date_range": "2025-05-04 to 2025-09-30",
+    "temporal_gaps_count": 54,
+    "longest_consecutive_window_days": 48,
+    "precipitation_variable": "precipitation",
+    "precipitation_units": "mm/day",
+    "rainfall_1d_available": true,
+    "rainfall_3d_available": true,
+    "rainfall_7d_available": true,
+    "ner_coverage_verified": true
+  },
+  "smap_soil_moisture": {
+    "discovered_files": 2512,
+    "valid_files": 2445,
+    "invalid_corrupt_files": 0,
+    "date_range": "2019-09-25 to 2026-08-28",
+    "soil_moisture_variable": "soil_moisture (AM) / soil_moisture_pm (PM)",
+    "units": "cm^3/cm^3",
+    "quality_control_policy": "Reject fill (-9999.0) and non-physical values. Check retrieval_qual_flag bit 0 (0 = recommended).",
+    "am_pm_handling_policy": "If both AM & PM recommended, take mean. If one recommended, use recommended pass. If both non-recommended valid, take mean with WARNING status.",
+    "ner_coverage_verified": true
+  },
+  "temporal_alignment_and_dataset": {
+    "overlapping_date_range": "2025-05-04 to 2025-09-30",
+    "usable_overlapping_dates_count": 96,
+    "feature_dataset_rows": 1440,
+    "feature_dataset_path": "C:\\Users\\ANSHUMAN SHARMA.LAPTOP-HFGVTEVM\\OneDrive\\Desktop\\ResQtech\\data\\processed\\dynamic_environmental_features.parquet",
+    "missing_rainfall_records": 240,
+    "missing_soil_moisture_records": 859,
+    "complete_aligned_records": 581
+  },
+  "dynamic_trigger_engine": {
+    "inputs": [
+      "rainfall_1d",
+      "rainfall_3d",
+      "rainfall_7d",
+      "soil_moisture"
+    ],
+    "methodology": "Weighted pressure index (0-100) combining short-term rainfall intensity, 3d/7d antecedent accumulation, and soil moisture saturation.",
+    "configuration": {
+      "high_threshold": 70.0,
+      "mod_threshold": 40.0,
+      "weights": {
+        "w_1d": 0.3,
+        "w_3d": 0.3,
+        "w_7d": 0.2,
+        "w_sm": 0.2
+      }
+    },
+    "disclaimer": "PROTOTYPE OPERATIONAL TRIGGER PARAMETERS \u2014 REQUIRES REGIONAL SCIENTIFIC CALIBRATION"
+  },
+  "offline_demo_cache": {
+    "cache_parquet_path": "C:\\Users\\ANSHUMAN SHARMA.LAPTOP-HFGVTEVM\\OneDrive\\Desktop\\ResQtech\\data\\processed\\demo_dynamic_environmental_cache.parquet",
+    "cache_json_path": "C:\\Users\\ANSHUMAN SHARMA.LAPTOP-HFGVTEVM\\OneDrive\\Desktop\\ResQtech\\data\\processed\\demo_dynamic_environmental_cache.json",
+    "row_count": 75
+  },
+  "code_modules_created": [
+    "src/config/settings.py (updated)",
+    "src/data/processors/__init__.py",
+    "src/data/processors/imerg_processor.py",
+    "src/data/processors/smap_processor.py",
+    "src/data/processors/temporal_alignment.py",
+    "src/risk/trigger_engine.py",
+    "src/data/generate_phase6_datasets.py",
+    "tests/test_phase6_dynamic_environment.py",
+    "reports/generate_phase6_reports.py"
+  ],
+  "scientific_limitations": [
+    "IMERG history in local raw cache is limited to 96 days (2025-05-04 to 2025-09-30).",
+    "GSI historical landslide records lack exact event times; historical landslides must not be matched with arbitrary satellite dates.",
+    "Dynamic trigger score is an uncalibrated operational prototype index requiring future regional scientific calibration."
+  ],
+  "near_real_time_architecture": "Near-real-time ready architecture. Data acquisition is decoupled from processing. Newly ingested IMERG/SMAP files are auto-discovered dynamically.",
+  "phase_complete": true,
+  "recommendation": "READY FOR PHASE 7"
+}

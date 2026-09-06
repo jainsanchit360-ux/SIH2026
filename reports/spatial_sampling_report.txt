@@ -1,0 +1,19 @@
+RESQTECH PHASE 4 — SPATIAL SAMPLING & DENSITY REPORT
+====================================================
+
+Timestamp: 2026-09-04 00:37:33
+Pipeline Runtime: 12.76 seconds
+
+Total Unified Samples: 22,050
+  - Positive Landslides (target=1): 11,025
+  - Background Controls (target=0): 11,025
+Class Ratio (Control/Pos): 1.00
+Spatial CV Blocks (~30km x 30km): 413
+
+Sampling Audit Statistics:
+  - Total Target Controls Requested: 11,025
+  - Controls Generated: 11,025
+  - Candidate Attempts: 11,265
+  - Rejected (Out of DEM bounds): 0
+  - Rejected (Within 500m Exclusion Buffer): 240
+  - Rejected (NoData Terrain): 0

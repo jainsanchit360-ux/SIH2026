@@ -1,0 +1,147 @@
+================================================================================
+RESQTECH — PHASE 8 BACKEND COMPLETION & FINAL GATE AUDIT REPORT
+================================================================================
+Generated: 2026-09-06
+Project: ResQtech (SIH26001 - AI-Based Early Warning and Landslide Risk Monitoring)
+Repository Root: d:\downloads\sih 26001
+
+1. BACKEND ARCHITECTURE
+   Modular FastAPI application architecture comprising:
+   - Application entrypoint: `backend/app/main.py`
+   - Settings & CORS config: `backend/app/core/config.py`
+   - API Router (`/api/v1`): `backend/app/api/endpoints.py`
+   - Pydantic validation schemas: `backend/app/schemas/risk_schema.py`
+   - Service layer: `backend/app/services/risk_service.py`
+   - Backend tests: `tests/test_backend.py`
+
+2. API VERSION
+   `0.1.0-prototype`
+
+3. EXACT ENDPOINTS (11 Implemented & Verified)
+   1. GET  /health
+   2. GET  /api/v1/system/status
+   3. GET  /api/v1/locations
+   4. GET  /api/v1/risk/latest
+   5. GET  /api/v1/risk/{site_id}
+   6. GET  /api/v1/risk/{site_id}/timeseries
+   7. GET  /api/v1/environment/{site_id}
+   8. GET  /api/v1/susceptibility/{site_id}
+   9. GET  /api/v1/explanation/{site_id}
+   10. GET /api/v1/map/risk
+   11. POST /api/v1/demo/simulate
+
+4. ENDPOINT COUNT
+   11 endpoints fully implemented, documented, and live-verified.
+
+5. SERVICE-LAYER DESIGN
+   `RiskAssessmentService` operates as a singleton service layer loading Phase 7 engines
+   (StaticSusceptibilityEngine, DynamicTriggerEngine, RiskFusionEngine) and connecting them
+   with offline processed datasets.
+
+6. DATASETS USED & DATE METRICS
+   - data/processed/dynamic_environmental_features.parquet
+     * Min Date: 2025-05-04 | Max Date: 2025-09-30
+     * Row Count: 1,440 | Unique Dates: 96
+     * Max Environmental Observation Date: 2025-09-30
+   - data/processed/current_landslide_risk.parquet
+     * Min Date: 2025-05-04 | Max Date: 2025-09-30
+     * Row Count: 1,440 | Unique Dates: 96
+     * Valid Confident Risk Rows: 1,200 (80 unique dates * 15 sites)
+     * Max Valid Risk Observation Date: 2025-09-23
+   - data/processed/demo_dynamic_environmental_cache.parquet
+     * Min Date: 2025-05-04 | Max Date: 2025-06-25
+     * Row Count: 75 | Unique Dates: 5
+
+7. TEMPORAL GAPS EXPLANATION & DATE FRESHNESS SEMANTICS
+   - 2025-08-09 context: 2025-08-09 represents the conclusion of the FIRST continuous valid risk
+     window (2025-06-29 to 2025-08-09, 42 consecutive days). It is NOT the overall dataset end date.
+   - Mid-dataset gap: 2025-08-11 to 2025-08-16 (6 days) where rolling 7-day rainfall history was
+     incomplete across a missing raw archive slice, returning null risk scores.
+   - Second valid window: 2025-08-17 to 2025-09-23 (38 consecutive days).
+   - Tail gap: 2025-09-24 to 2025-09-30 (7 days) where 7-day rolling window calculations extend past the dataset end.
+   - Explicit Freshness Metadata:
+     * `latest_environmental_observation_date`: 2025-09-30
+     * `latest_valid_risk_observation_date`: 2025-09-23
+     * `last_available_observation_date`: 2025-09-23
+     * `dataset_generated_at`: 2026-09-06
+
+8. MODEL ARTIFACT USED
+   models/trained/static_susceptibility_model_phase5b.joblib (RandomForestClassifier)
+
+9. OFFLINE BEHAVIOR
+   100% offline execution. Reads processed/cached data stored in `data/processed/`.
+   No external access required to NASA, SMAP, IMERG, or raw satellite archives.
+
+10. SYSTEM FRESHNESS SEMANTICS
+    All records explicitly tagged with:
+    - `freshness_status = "OFFLINE_HISTORICAL_CACHE"`
+    - `is_live = False`
+    - `data_source = "REAL_OBSERVED_PROCESSED"`
+
+11. MAP OUTPUT FORMAT
+    Standards-compliant GeoJSON `FeatureCollection` returned by `GET /api/v1/map/risk`.
+
+12. GEOJSON COORDINATE CONVENTION
+    Strict RFC 7946 coordinate ordering enforced: `[longitude, latitude]` in EPSG:4326.
+
+13. DEMO ENDPOINT BEHAVIOR
+    `POST /api/v1/demo/simulate` allows custom environmental parameter overrides
+    (1d/3d/7d rainfall, soil moisture) and returns baseline vs. simulated comparison metrics.
+
+14. SIMULATION SAFEGUARDS
+    - `simulation_mode = True` and `data_source = "SIMULATED_DEMO"` flags returned on all simulated outputs.
+    - Historical parquet datasets in `data/processed/` are NEVER mutated.
+
+15. ERROR HANDLING
+    - 404 Not Found for non-existent `site_id` requests.
+    - 422 Unprocessable Entity for negative rainfall or out-of-bounds soil moisture parameters.
+    - Safe error handling without stack trace or local path leakage.
+
+16. CORS CONFIGURATION
+    Configured for local React + Vite development:
+    `http://localhost:5173`, `http://127.0.0.1:5173`, `http://localhost:3000`, `http://127.0.0.1:3000`.
+
+17. FULL REPOSITORY TEST SUITE RESULTS (pytest)
+    - Total Tests Executed: 74
+    - Passed: 65
+    - Skipped: 9 (8 raw-data-dependent tests + 1 dev environment optional loader)
+    - Failed: 0
+
+18. RAW-DATA-DEPENDENT SKIPPED TESTS SUMMARY
+    1. `test_phase6_dynamic_environment.py::test_imerg_discovery_and_metadata`
+       - Reason: SKIPPED — raw IMERG archive not included in developer handover (`data/raw/rainfall/`)
+    2. `test_phase6_dynamic_environment.py::test_imerg_point_extraction_valid`
+       - Reason: SKIPPED — raw IMERG archive not included in developer handover (`data/raw/rainfall/`)
+    3. `test_phase6_dynamic_environment.py::test_imerg_out_of_bounds`
+       - Reason: SKIPPED — raw IMERG archive not included in developer handover (`data/raw/rainfall/`)
+    4. `test_phase6_dynamic_environment.py::test_imerg_rolling_consecutive_window_valid`
+       - Reason: SKIPPED — raw IMERG archive not included in developer handover (`data/raw/rainfall/`)
+    5. `test_phase6_dynamic_environment.py::test_smap_discovery_and_metadata`
+       - Reason: SKIPPED — raw SMAP archive not included in developer handover (`data/raw/smap/`)
+    6. `test_phase6_dynamic_environment.py::test_smap_point_extraction_quality`
+       - Reason: SKIPPED — raw SMAP archive not included in developer handover (`data/raw/smap/`)
+    7. `test_phase6_dynamic_environment.py::test_temporal_alignment_complete`
+       - Reason: SKIPPED — raw satellite archives not included in developer handover
+    8. `test_phase6_dynamic_environment.py::test_temporal_alignment_partial`
+       - Reason: SKIPPED — raw satellite archives not included in developer handover
+    9. `test_gsi_loader.py`
+       - Reason: SKIPPED — optional geopandas/pymupdf packages not installed in dev handover environment
+
+19. REPORT FILE PATHS CONFIRMATION
+    - reports/phase8_backend_report.txt
+    - reports/phase8_backend_report.json
+    (Note: `phase8_backend_report.js` mentioned in earlier text was a prose summary typo; official reports are txt and json).
+
+20. LIVE HTTP & FRESHNESS VERIFICATION
+    All 11 endpoints verified live on Uvicorn server (`http://127.0.0.1:8000`).
+    - GET /api/v1/system/status -> HTTP 200 OK, returns dynamic dates and status flags
+    - GET /api/v1/risk/latest -> HTTP 200 OK, returns 15 location records with `is_live = False`
+
+21. SCIENTIFIC TERMINOLOGY SAFEGUARDS
+    Scores are strictly indices [0-100]. Never labelled as "probability" or "exact time prediction".
+    Mandatory disclaimer attached to all risk outputs:
+    "PROTOTYPE OPERATIONAL PARAMETERS — REQUIRES REGIONAL CALIBRATION"
+
+================================================================================
+FINAL CONCLUSION: READY FOR PHASE 9 FRONTEND
+================================================================================

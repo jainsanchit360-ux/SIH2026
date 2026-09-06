@@ -1,0 +1,123 @@
+{
+  "phase": "PHASE 3 \u2014 SRTM TERRAIN PROCESSING",
+  "timestamp": "2026-09-02T15:50:28Z",
+  "processing_time_seconds": 18.7,
+  "dem_source": "NASA/USGS SRTMGL1 (1 arc-second)",
+  "discovered_archives": 140,
+  "valid_tiles": 140,
+  "newly_extracted_tiles": 0,
+  "reused_cached_tiles": 140,
+  "corrupt_invalid_archives": 0,
+  "raster_dimensions": [
+    3601,
+    3601
+  ],
+  "spatial_resolution": "1 arc-second (~30m)",
+  "nodata_value": -32768,
+  "total_gsi_points": 11025,
+  "dem_covered_points": 11025,
+  "dem_uncovered_points": 0,
+  "coverage_percentage": 100.0,
+  "elevation_stats": {
+    "count": 11025,
+    "missing_count": 0,
+    "min": 16.0,
+    "max": 4166.0,
+    "mean": 928.7327891156463,
+    "median": 902.0,
+    "std": 525.1623607534136,
+    "p1": 55.0,
+    "p5": 140.0,
+    "p25": 541.0,
+    "p75": 1262.0,
+    "p95": 1757.7999999999993,
+    "p99": 2546.5600000000013
+  },
+  "slope_stats": {
+    "count": 11025,
+    "missing_count": 0,
+    "min": 0.0,
+    "max": 67.55784678710208,
+    "mean": 24.95456934018522,
+    "median": 25.166543872052113,
+    "std": 9.99851754745542,
+    "p1": 2.8265583139520305,
+    "p5": 7.971942867441491,
+    "p25": 18.13243632055459,
+    "p75": 31.671838867821002,
+    "p95": 41.081312968110915,
+    "p99": 49.49896668183689
+  },
+  "suspicious_values": {
+    "suspicious_elevation_count": 0,
+    "suspicious_slope_gt_75deg_count": 0
+  },
+  "slope_calculation_method": "Latitude-Aware Horn 3x3 Finite Difference Gradient",
+  "tile_edge_strategy": "Border replication & edge-aware window slicing",
+  "state_wise_coverage": [
+    {
+      "state_clean": "Arunachal Pradesh",
+      "total_points": 1223,
+      "dem_covered_points": 1223,
+      "mean_elevation": 874.6116107931316,
+      "mean_slope": 28.436064458747744,
+      "coverage_pct": 100.0
+    },
+    {
+      "state_clean": "Assam",
+      "total_points": 856,
+      "dem_covered_points": 856,
+      "mean_elevation": 361.6553738317757,
+      "mean_slope": 17.08746880248134,
+      "coverage_pct": 100.0
+    },
+    {
+      "state_clean": "Manipur",
+      "total_points": 1631,
+      "dem_covered_points": 1631,
+      "mean_elevation": 1100.4604537093808,
+      "mean_slope": 25.66403734201182,
+      "coverage_pct": 100.0
+    },
+    {
+      "state_clean": "Meghalaya",
+      "total_points": 1052,
+      "dem_covered_points": 1052,
+      "mean_elevation": 908.1977186311788,
+      "mean_slope": 21.2706604572425,
+      "coverage_pct": 100.0
+    },
+    {
+      "state_clean": "Mizoram",
+      "total_points": 3487,
+      "dem_covered_points": 3487,
+      "mean_elevation": 795.918841410955,
+      "mean_slope": 25.084212400090696,
+      "coverage_pct": 100.0
+    },
+    {
+      "state_clean": "Nagaland",
+      "total_points": 1902,
+      "dem_covered_points": 1902,
+      "mean_elevation": 1148.4537329127234,
+      "mean_slope": 24.978595658992916,
+      "coverage_pct": 100.0
+    },
+    {
+      "state_clean": "Sikkim",
+      "total_points": 777,
+      "dem_covered_points": 777,
+      "mean_elevation": 1450.4633204633205,
+      "mean_slope": 32.026638175368156,
+      "coverage_pct": 100.0
+    },
+    {
+      "state_clean": "Tripura",
+      "total_points": 97,
+      "dem_covered_points": 97,
+      "mean_elevation": 237.51546391752578,
+      "mean_slope": 16.72713089636417,
+      "coverage_pct": 100.0
+    }
+  ]
+}

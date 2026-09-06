@@ -1,0 +1,57 @@
+# Node / Frontend
+node_modules/
+**/node_modules/
+frontend/dist/
+frontend/build/
+.npm
+*.log
+
+# Python
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Testing & Cache
+.pytest_cache/
+pytest_cache/
+.coverage
+htmlcov/
+.oxlintcache
+
+# Environment Variables & Secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Large Binary Files (>100MB)
+*.pdf
+reports/*.pdf

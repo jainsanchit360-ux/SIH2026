@@ -1,0 +1,106 @@
+{
+  "report_timestamp": "2026-09-06T22:42:00+05:30",
+  "project_name": "ResQtech",
+  "problem_statement": "SIH26001",
+  "phase": "Phase 9 — React + Leaflet GIS Frontend",
+  "frontend_framework_version": "React 19.0.0 + Vite 8.2.2",
+  "major_libraries": [
+    "Leaflet (v1.9.4)",
+    "react-leaflet (v5.0.0)",
+    "Chart.js (v4.4.8)",
+    "react-chartjs-2 (v5.3.0)",
+    "lucide-react (v1.16.0)",
+    "axios (v1.13.5)"
+  ],
+  "frontend_architecture": "Component-driven architecture in frontend/src/ with centralized state management in App.jsx and API service abstraction in api/client.js",
+  "components_created": [
+    "Header.jsx",
+    "Footer.jsx",
+    "MapView.jsx",
+    "LocationSearch.jsx",
+    "LocationPanel.jsx",
+    "EnvironmentalCards.jsx",
+    "ExplainabilityPanel.jsx",
+    "RiskTrendChart.jsx",
+    "RiskLayerComparison.jsx",
+    "DemoSimulationPanel.jsx",
+    "SystemStatus.jsx"
+  ],
+  "backend_base_url_strategy": "VITE_API_BASE_URL env variable in frontend/.env defaulting to http://127.0.0.1:8000 with Vite proxy support",
+  "api_endpoints_consumed": [
+    "GET /health",
+    "GET /api/v1/system/status",
+    "GET /api/v1/locations",
+    "GET /api/v1/risk/latest",
+    "GET /api/v1/risk/{site_id}",
+    "GET /api/v1/risk/{site_id}/timeseries",
+    "GET /api/v1/environment/{site_id}",
+    "GET /api/v1/susceptibility/{site_id}",
+    "GET /api/v1/explanation/{site_id}",
+    "GET /api/v1/map/risk",
+    "POST /api/v1/demo/simulate"
+  ],
+  "map_technology": "Leaflet + react-leaflet centered on North-East India (25.5° N, 92.5° E, Zoom 7) with CartoDB Dark Matter tile basemap",
+  "map_feature_count": 15,
+  "location_count": 15,
+  "risk_level_visualization": {
+    "HIGH": "Red (#ef4444)",
+    "MODERATE": "Amber/Yellow (#f59e0b)",
+    "LOW": "Green (#10b981)",
+    "INSUFFICIENT_DATA": "Neutral Grey (#64748b)"
+  },
+  "search_filter_capability": "Real-time site name/district text search + state filter dropdown",
+  "location_detail_capability": "Detailed location intelligence panel featuring site metadata, risk level badge, terrain elevation/slope, and GSI landslide counts",
+  "environmental_cards": "24h rainfall, 3-day rainfall, 7-day rainfall, and soil moisture cards with graceful N/A fallback handling",
+  "explainability_support": "Why is this location at risk? panel rendering major risk factors, static predisposition, dynamic trigger factors, what-changed narrative, and trend deltas",
+  "time_series_support": "Interactive Chart.js line chart plotting historical current_risk_score [0–100] and dynamic_trigger_score [0–100] over observation dates",
+  "static_dynamic_current_risk_representation": "2-layer operational risk architecture card showing Layer 1 Static (55%) + Layer 2 Dynamic (45%) -> Fused Risk Score Index",
+  "freshness_offline_messaging": {
+    "offline_badge": "OFFLINE HISTORICAL PROTOTYPE DATA",
+    "is_live": false,
+    "disclaimer": "PROTOTYPE OPERATIONAL PARAMETERS — REQUIRES REGIONAL CALIBRATION"
+  },
+  "demo_simulation_ui_status": "Interactive What-If scenario simulation panel connected to POST /api/v1/demo/simulate tagged strictly with SIMULATED DEMO",
+  "responsive_behavior": "Desktop-first geospatial monitoring dashboard layout with fluid flexbox/grid layout stacking on smaller screens",
+  "accessibility_safeguards": "Risk levels explicitly rendered as text labels alongside color badges; high-contrast typography",
+  "frontend_tests": "Unit tests in frontend/src/api/client.test.js",
+  "build_status": "PASSED (npm run build transformed 1946 modules with 0 errors)",
+  "lint_status": "PASSED",
+  "backend_regression_test_result": {
+    "passed": 65,
+    "skipped": 9,
+    "failed": 0
+  },
+  "browser_integration_status": "PASSED (Live API connection verified between FastAPI backend and React frontend)",
+  "known_limitations": [
+    "Baseline data represents historical offline observations (is_live = false)",
+    "Full alert notification dispatch, SMS/email notifications, and Authority Command Center workflows are reserved for Phase 10"
+  ],
+  "files_created": [
+    "frontend/package.json",
+    "frontend/vite.config.js",
+    "frontend/.env",
+    "frontend/.env.example",
+    "frontend/src/index.css",
+    "frontend/src/api/client.js",
+    "frontend/src/api/client.test.js",
+    "frontend/src/components/Header.jsx",
+    "frontend/src/components/Footer.jsx",
+    "frontend/src/components/MapView.jsx",
+    "frontend/src/components/LocationSearch.jsx",
+    "frontend/src/components/LocationPanel.jsx",
+    "frontend/src/components/EnvironmentalCards.jsx",
+    "frontend/src/components/ExplainabilityPanel.jsx",
+    "frontend/src/components/RiskTrendChart.jsx",
+    "frontend/src/components/RiskLayerComparison.jsx",
+    "frontend/src/components/DemoSimulationPanel.jsx",
+    "frontend/src/components/SystemStatus.jsx",
+    "frontend/src/App.jsx",
+    "reports/phase9_frontend_report.txt",
+    "reports/phase9_frontend_report.json"
+  ],
+  "files_modified": [
+    "frontend/src/main.jsx"
+  ],
+  "final_conclusion": "READY FOR PHASE 10 ALERTS + AUTHORITY WORKFLOW"
+}

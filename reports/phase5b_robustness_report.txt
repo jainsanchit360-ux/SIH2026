@@ -1,0 +1,27 @@
+RESQTECH PHASE 5B — STATIC SUSCEPTIBILITY MODEL ROBUSTNESS REPORT
+====================================================================
+
+Timestamp: 2026-09-05 14:40:37
+Pipeline Runtime: 1553.32 seconds
+
+1. PROBABILITY DISTRIBUTION DIAGNOSIS (FULL FEATURES):
+   - Positive Class Prob Median: 0.0399, Mean: 0.1092, P5: 0.0011, P95: 0.4896
+   - Control Class Prob Median:  0.0042, Mean: 0.0306, P5: 0.0000, P95: 0.1451
+
+2. FEATURE ABLATION RESULTS (SPATIAL GROUPKFOLD CV):
+   - Model_A_Terrain_Only (RandomForest): AUC=0.7827, Rec=0.8226, F1=0.7468, Acc=0.7216
+   - Model_A_Terrain_Only (GradientBoosting): AUC=0.7839, Rec=0.8160, F1=0.7457, Acc=0.7223
+   - Model_B_Terrain_Broader_Context (RandomForest): AUC=0.7364, Rec=0.1617, F1=0.2701, Acc=0.5657
+   - Model_B_Terrain_Broader_Context (GradientBoosting): AUC=0.7471, Rec=0.1622, F1=0.2709, Acc=0.5663
+   - Model_C_Full_Features (RandomForest): AUC=0.7476, Rec=0.0481, F1=0.0912, Acc=0.5215
+   - Model_C_Full_Features (GradientBoosting): AUC=0.7608, Rec=0.0534, F1=0.1006, Acc=0.5234
+   - Model_D_Terrain_Selected_Regional (RandomForest): AUC=0.7368, Rec=0.1633, F1=0.2726, Acc=0.5667
+   - Model_D_Terrain_Selected_Regional (GradientBoosting): AUC=0.7444, Rec=0.1634, F1=0.2729, Acc=0.5671
+
+3. SELECTED BEST CONFIGURATION:
+   - Group: Model_B_Terrain_Broader_Context
+   - Features: ['elevation_m', 'slope_deg', 'historical_count_5km', 'historical_count_10km']
+   - Recommended Threshold: 0.15
+   - Spatial Recall at 0.15 Threshold: 0.2941
+   - Spatial F1-Score at 0.15 Threshold: 0.4273
+   - Spatial ROC-AUC: 0.7364

@@ -1,0 +1,59 @@
+============================================================
+RESQTECH PHASE 3 — SRTM TERRAIN DATA QUALITY REPORT
+============================================================
+
+Processing Timestamp: 2026-09-02T15:50:28Z
+Processing Runtime  : 18.70 seconds
+DEM Source          : NASA/USGS SRTMGL1 (1 arc-second)
+Discovered Archives : 140
+Valid DEM Tiles     : 140
+Raster Dimensions   : 3601 x 3601
+Spatial Resolution  : 1 arc-second (~30m)
+
+--- COVERAGE SUMMARY ---
+Total GSI NER Points: 11025
+DEM Covered Points  : 11025 (100.00%)
+DEM Uncovered Points: 0 (0.00%)
+
+--- ELEVATION STATISTICS (METERS) ---
+  count          : 11025
+  missing_count  : 0
+  min            : 16.0
+  max            : 4166.0
+  mean           : 928.7327891156463
+  median         : 902.0
+  std            : 525.1623607534136
+  p1             : 55.0
+  p5             : 140.0
+  p25            : 541.0
+  p75            : 1262.0
+  p95            : 1757.7999999999993
+  p99            : 2546.5600000000013
+
+--- SLOPE STATISTICS (DEGREES) ---
+  count          : 11025
+  missing_count  : 0
+  min            : 0.0
+  max            : 67.55784678710208
+  mean           : 24.95456934018522
+  median         : 25.166543872052113
+  std            : 9.99851754745542
+  p1             : 2.8265583139520305
+  p5             : 7.971942867441491
+  p25            : 18.13243632055459
+  p75            : 31.671838867821002
+  p95            : 41.081312968110915
+  p99            : 49.49896668183689
+
+--- STATE-WISE COVERAGE BREAKDOWN ---
+      state_clean  total_points  dem_covered_points  mean_elevation  mean_slope  coverage_pct
+Arunachal Pradesh          1223                1223      874.611611   28.436064         100.0
+            Assam           856                 856      361.655374   17.087469         100.0
+          Manipur          1631                1631     1100.460454   25.664037         100.0
+        Meghalaya          1052                1052      908.197719   21.270660         100.0
+          Mizoram          3487                3487      795.918841   25.084212         100.0
+         Nagaland          1902                1902     1148.453733   24.978596         100.0
+           Sikkim           777                 777     1450.463320   32.026638         100.0
+          Tripura            97                  97      237.515464   16.727131         100.0
+
+============================================================

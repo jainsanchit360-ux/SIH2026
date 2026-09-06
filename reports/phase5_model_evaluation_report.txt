@@ -1,0 +1,64 @@
+RESQTECH PHASE 5 — STATIC LANDSLIDE SUSCEPTIBILITY EVALUATION REPORT
+===================================================================
+
+Timestamp: 2026-09-04 01:06:08
+Pipeline Runtime: 152.40 seconds
+
+Dataset Shape: 22,050 rows, 39 columns
+Target Distribution: {1: 11025, 0: 11025}
+Spatial CV Blocks (~30km): 413
+
+PRIMARY PREDICTOR FEATURES:
+  - elevation_m
+  - slope_deg
+  - nearest_landslide_distance_m
+  - historical_count_1km
+  - historical_count_2km
+  - historical_count_5km
+  - historical_count_10km
+  - unique_historical_count_1km
+  - unique_historical_count_5km
+
+EXCLUDED METADATA:
+  - slide_id
+  - sample_type
+  - target
+  - spatial_block_id
+  - state_clean
+  - district
+  - latitude
+  - longitude
+  - lat_num
+  - lon_num
+  - dem_covered
+  - elevation_valid
+  - slope_valid
+  - dem_tile
+  - min_distance_to_landslide_m
+
+EVALUATION RESULTS COMPARISON:
+  - Dummy Classifier (Most Frequent) Accuracy: 0.5000
+  - Random Split (80/20) Random Forest ROC-AUC: 0.9810
+  - Leakage-Safe Spatial CV Random Forest ROC-AUC (Mean ± Std): 0.7476 ± 0.0377
+  - Leakage-Safe Spatial CV Gradient Boosting ROC-AUC (Mean ± Std): 0.7608 ± 0.0342
+
+CHOSEN MODEL DETAILS:
+  - Selected Algorithm: RandomForestClassifier
+  - Prototype Threshold: 0.5
+  - Spatial CV Accuracy: 0.5215
+  - Spatial CV Precision: 0.9093
+  - Spatial CV Recall: 0.0481
+  - Spatial CV F1 Score: 0.0912
+  - Spatial CV False Negative Rate (FNR): 0.9519
+  - Calibration Brier Score: 0.4151
+
+TOP FEATURE IMPORTANCES (Gini Impurity):
+  1. nearest_landslide_distance_m: 0.4137
+  2. historical_count_2km: 0.1914
+  3. historical_count_1km: 0.1080
+  4. unique_historical_count_1km: 0.1015
+  5. historical_count_5km: 0.0529
+  6. unique_historical_count_5km: 0.0377
+  7. slope_deg: 0.0336
+  8. elevation_m: 0.0307
+  9. historical_count_10km: 0.0305

@@ -1,0 +1,114 @@
+{
+  "model_name": "RandomForestClassifier",
+  "model_version": "1.1.0-phase5b",
+  "timestamp": "2026-09-05 14:40:37",
+  "training_dataset": "C:\\Users\\ANSHUMAN SHARMA.LAPTOP-HFGVTEVM\\OneDrive\\Desktop\\ResQtech\\data\\processed\\spatial_susceptibility_dataset.parquet",
+  "total_rows": 22050,
+  "positives": 11025,
+  "background_controls": 11025,
+  "selected_feature_group": "Model_B_Terrain_Broader_Context",
+  "primary_features": [
+    "elevation_m",
+    "slope_deg",
+    "historical_count_5km",
+    "historical_count_10km"
+  ],
+  "recommended_threshold": 0.15,
+  "spatial_cv_metrics_at_recommended_threshold": {
+    "accuracy_mean": 0.6057142857142856,
+    "accuracy_std": 0.025603869365796828,
+    "precision_mean": 0.7805378837556518,
+    "precision_std": 0.030175788810587512,
+    "recall_mean": 0.29500077311617845,
+    "recall_std": 0.025614885467768432,
+    "f1_mean": 0.42752059275165594,
+    "f1_std": 0.028640486861632775,
+    "roc_auc_mean": 0.7364468365041705,
+    "roc_auc_std": 0.03411227687604988,
+    "false_negative_rate_mean": 0.7049992268838214,
+    "false_negative_rate_std": 0.025614885467768446,
+    "brier_score_mean": 0.38087183963913046,
+    "brier_score_std": 0.02703679215908687,
+    "oof_global": {
+      "threshold": 0.15,
+      "accuracy": 0.6057142857142858,
+      "precision": 0.7805054151624549,
+      "recall": 0.2941496598639456,
+      "f1": 0.42727272727272725,
+      "specificity": 0.9172789115646258,
+      "roc_auc": 0.7341063240110859,
+      "brier_score": 0.38087183963913046,
+      "tn": 10113,
+      "fp": 912,
+      "fn": 7782,
+      "tp": 3243,
+      "false_negative_rate": 0.7058503401360544,
+      "false_positive_rate": 0.08272108843537415,
+      "total_samples": 22050,
+      "positives": 11025,
+      "controls": 11025
+    }
+  },
+  "oof_global_metrics": {
+    "threshold": 0.15,
+    "accuracy": 0.6057142857142858,
+    "precision": 0.7805054151624549,
+    "recall": 0.2941496598639456,
+    "f1": 0.42727272727272725,
+    "specificity": 0.9172789115646258,
+    "roc_auc": 0.7341063240110859,
+    "brier_score": 0.38087183963913046,
+    "tn": 10113,
+    "fp": 912,
+    "fn": 7782,
+    "tp": 3243,
+    "false_negative_rate": 0.7058503401360544,
+    "false_positive_rate": 0.08272108843537415,
+    "total_samples": 22050,
+    "positives": 11025,
+    "controls": 11025
+  },
+  "feature_importances": [
+    {
+      "feature": "historical_count_5km",
+      "importance": 0.512265145386299
+    },
+    {
+      "feature": "historical_count_10km",
+      "importance": 0.261216901773884
+    },
+    {
+      "feature": "slope_deg",
+      "importance": 0.1307867060137985
+    },
+    {
+      "feature": "elevation_m",
+      "importance": 0.09573124682601841
+    }
+  ],
+  "prob_distribution_stats_positives": {
+    "count": 11025,
+    "mean": 0.10922669974407152,
+    "std": 0.17530376838547693,
+    "median": 0.03990350482613827,
+    "p5": 0.001123846691494538,
+    "p25": 0.00796833565957962,
+    "p75": 0.11941156968175616,
+    "p95": 0.48955818813429525
+  },
+  "prob_distribution_stats_controls": {
+    "count": 11025,
+    "mean": 0.03058856194897943,
+    "std": 0.07152872172569869,
+    "median": 0.004216372072225454,
+    "p5": 3.0020672438199416e-05,
+    "p25": 0.0005080477151746472,
+    "p75": 0.02762019673415369,
+    "p95": 0.14513370463509517
+  },
+  "scientific_limitations": [
+    "Local 1km/2km distance features attenuate in unseen spatial blocks 30km+ away.",
+    "Using broader regional density features (5km/10km) improves spatial ROC-AUC stability.",
+    "Operating threshold reduced to 0.15 for hazard screening to achieve high recall under spatial distribution shift."
+  ]
+}

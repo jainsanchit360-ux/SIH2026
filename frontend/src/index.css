@@ -1,0 +1,293 @@
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --bg-dark: #0b0f19;
+  --bg-panel: #111827;
+  --bg-panel-header: #1e293b;
+  --bg-border: #1e293b;
+  --bg-hover: #1e293b;
+  
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+  --text-muted: #64748b;
+
+  --accent-cyan: #38bdf8;
+  --accent-blue: #3b82f6;
+
+  /* Risk status colors */
+  --risk-high: #ef4444;
+  --risk-high-bg: rgba(239, 68, 68, 0.18);
+  --risk-high-border: rgba(239, 68, 68, 0.4);
+
+  --risk-mod: #f59e0b;
+  --risk-mod-bg: rgba(245, 158, 11, 0.18);
+  --risk-mod-border: rgba(245, 158, 11, 0.4);
+
+  --risk-low: #10b981;
+  --risk-low-bg: rgba(16, 185, 129, 0.18);
+  --risk-low-border: rgba(16, 185, 129, 0.4);
+
+  --risk-nodata: #64748b;
+  --risk-nodata-bg: rgba(100, 116, 139, 0.18);
+  --risk-nodata-border: rgba(100, 116, 139, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Layout Grid */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100vh - 64px - 48px); /* Top header & bottom footer */
+}
+
+@media (max-width: 1024px) {
+  .main-content {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+}
+
+.map-section {
+  flex: 1.4;
+  position: relative;
+  min-height: 450px;
+  background-color: #080c14;
+}
+
+.sidebar-section {
+  flex: 1;
+  max-width: 480px;
+  min-width: 360px;
+  background-color: var(--bg-panel);
+  border-left: 1px solid var(--bg-border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+@media (max-width: 1024px) {
+  .sidebar-section {
+    max-width: 100%;
+    min-width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--bg-border);
+  }
+}
+
+.secondary-dashboard {
+  padding: 1.5rem;
+  background-color: var(--bg-dark);
+  border-top: 1px solid var(--bg-border);
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.25rem;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* UI Cards */
+.panel-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--bg-border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.panel-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-sub);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Status Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.badge-high {
+  background-color: var(--risk-high-bg);
+  color: var(--risk-high);
+  border: 1px solid var(--risk-high-border);
+}
+
+.badge-moderate {
+  background-color: var(--risk-mod-bg);
+  color: var(--risk-mod);
+  border: 1px solid var(--risk-mod-border);
+}
+
+.badge-low {
+  background-color: var(--risk-low-bg);
+  color: var(--risk-low);
+  border: 1px solid var(--risk-low-border);
+}
+
+.badge-nodata {
+  background-color: var(--risk-nodata-bg);
+  color: var(--risk-nodata);
+  border: 1px solid var(--risk-nodata-border);
+}
+
+/* Leaflet Map Customizations */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #080c14 !important;
+}
+
+.custom-risk-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: white;
+  font-weight: 800;
+  font-size: 11px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  border: 2px solid #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.custom-risk-marker:hover {
+  transform: scale(1.2);
+  z-index: 1000 !important;
+}
+
+.custom-risk-marker.selected {
+  transform: scale(1.35);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.9);
+  border: 2.5 solid var(--accent-cyan);
+}
+
+.custom-risk-marker.active-alert {
+  box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8);
+  animation: pulse-ring 1.8s infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.custom-risk-marker.high { background-color: var(--risk-high); }
+.custom-risk-marker.moderate { background-color: var(--risk-mod); }
+.custom-risk-marker.low { background-color: var(--risk-low); }
+.custom-risk-marker.nodata { background-color: var(--risk-nodata); }
+
+.leaflet-popup-content-wrapper {
+  background: var(--bg-panel) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--bg-border) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7) !important;
+}
+
+.leaflet-popup-tip {
+  background: var(--bg-panel) !important;
+}
+
+/* Utility buttons */
+.btn-primary {
+  background: var(--accent-blue);
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+}
+
+.btn-secondary {
+  background: var(--bg-panel-header);
+  color: var(--text-main);
+  border: 1px solid var(--bg-border);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--bg-hover);
+}

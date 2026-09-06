@@ -1,0 +1,90 @@
+{
+  "audit_timestamp": "2026-09-06T17:34:00+05:30",
+  "project_name": "ResQtech",
+  "problem_statement": "SIH26001",
+  "repository_location": "d:\\downloads\\sih 26001",
+  "python_version": "3.14.6",
+  "environment_used": "System Python (C:\\Python314\\python.exe)",
+  "dependency_status": {
+    "numpy": "2.5.1",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "joblib": "1.5.3",
+    "pyarrow": "24.0.0",
+    "fastapi": "0.138.0",
+    "pydantic": "2.13.4",
+    "pydantic-settings": "2.15.0",
+    "uvicorn": "0.49.0",
+    "pytest": "9.1.1"
+  },
+  "portability_fixes_made": [
+    "Un-nested double-nested directory structure across backend, data, docs, frontend, geo, models, reports, scripts, src, tests",
+    "Verified BASE_DIR project root resolution in src/config/settings.py"
+  ],
+  "hardcoded_paths_found": [
+    "C:\\Users\\ANSHUMAN SHARMA.LAPTOP-HFGVTEVM\\OneDrive\\Desktop\\ResQtech\\..."
+  ],
+  "hardcoded_paths_fixed": true,
+  "trained_model_path": "models/trained/static_susceptibility_model_phase5b.joblib",
+  "model_load_status": "LOADED_SUCCESSFULLY",
+  "model_type": "RandomForestClassifier",
+  "expected_model_features": [
+    "elevation_m",
+    "slope_deg",
+    "historical_count_5km",
+    "historical_count_10km"
+  ],
+  "processed_dynamic_dataset": {
+    "path": "data/processed/dynamic_environmental_features.parquet",
+    "status": "EXISTS_AND_READABLE",
+    "rows": 1440,
+    "columns": 26,
+    "size_kb": 58.77
+  },
+  "current_risk_dataset": {
+    "path": "data/processed/current_landslide_risk.parquet",
+    "status": "EXISTS_AND_READABLE",
+    "rows": 1440,
+    "columns": 33,
+    "size_kb": 126.49
+  },
+  "offline_demo_cache": {
+    "parquet_path": "data/processed/demo_dynamic_environmental_cache.parquet",
+    "json_path": "data/processed/demo_dynamic_environmental_cache.json",
+    "status": "EXISTS_AND_READABLE",
+    "rows": 75,
+    "columns": 26,
+    "size_kb": 18.89
+  },
+  "phase7_module_import_status": "ALL_PASSED",
+  "automated_test_results": {
+    "total_core_tests": 41,
+    "passed": 33,
+    "failed_due_to_excluded_raw_data": 8,
+    "unexpected_failures": 0
+  },
+  "smoke_test_result": {
+    "status": "PASSED",
+    "real_record_site": "GSI_SITE_01",
+    "real_fused_risk_score": 40.21,
+    "real_fused_risk_level": "MODERATE",
+    "simulated_fused_risk_score": 84.63,
+    "simulated_fused_risk_level": "HIGH",
+    "simulation_flags_verified": true
+  },
+  "intentionally_excluded_raw_datasets": [
+    "data/raw/gsi/",
+    "data/raw/dem/",
+    "data/raw/rainfall/",
+    "data/raw/smap/"
+  ],
+  "anything_still_missing": null,
+  "known_scientific_limitations": [
+    "Static susceptibility is a predisposition ranking, not exact failure probability",
+    "Dynamic trigger score is a prototype environmental pressure index",
+    "Current landslide risk is a prototype operational fusion score, not exact probability or time prediction",
+    "Mandatory calibration disclaimer attached to all risk outputs"
+  ],
+  "current_development_state": "Phases 1-7 complete, verified, portable, and operational offline",
+  "final_recommendation": "READY FOR PHASE 8"
+}

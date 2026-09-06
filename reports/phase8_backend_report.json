@@ -1,0 +1,188 @@
+{
+  "report_timestamp": "2026-09-06T22:35:00+05:30",
+  "project_name": "ResQtech",
+  "problem_statement": "SIH26001",
+  "backend_architecture": "FastAPI with Application Entrypoint, Pydantic Schemas, RiskAssessmentService Singleton, and Modular V1 API Router",
+  "api_version": "0.1.0-prototype",
+  "exact_endpoints": [
+    "GET /health",
+    "GET /api/v1/system/status",
+    "GET /api/v1/locations",
+    "GET /api/v1/risk/latest",
+    "GET /api/v1/risk/{site_id}",
+    "GET /api/v1/risk/{site_id}/timeseries",
+    "GET /api/v1/environment/{site_id}",
+    "GET /api/v1/susceptibility/{site_id}",
+    "GET /api/v1/explanation/{site_id}",
+    "GET /api/v1/map/risk",
+    "POST /api/v1/demo/simulate"
+  ],
+  "endpoint_count": 11,
+  "service_layer_design": "RiskAssessmentService singleton orchestrating Phase 7 engines (susceptibility, trigger, fusion, simulation) using offline cached Parquet datasets",
+  "datasets_used": [
+    "data/processed/current_landslide_risk.parquet",
+    "data/processed/dynamic_environmental_features.parquet",
+    "data/processed/demo_dynamic_environmental_cache.parquet"
+  ],
+  "dataset_date_metrics": {
+    "dynamic_environmental_features": {
+      "min_observation_date": "2025-05-04",
+      "max_observation_date": "2025-09-30",
+      "row_count": 1440,
+      "unique_dates": 96,
+      "max_environmental_date": "2025-09-30"
+    },
+    "current_landslide_risk": {
+      "min_observation_date": "2025-05-04",
+      "max_observation_date": "2025-09-30",
+      "row_count": 1440,
+      "unique_dates": 96,
+      "valid_confident_risk_rows": 1200,
+      "max_valid_risk_date": "2025-09-23"
+    },
+    "demo_dynamic_environmental_cache": {
+      "min_observation_date": "2025-05-04",
+      "max_observation_date": "2025-06-25",
+      "row_count": 75,
+      "unique_dates": 5
+    }
+  },
+  "temporal_gaps_explanation": {
+    "context_2025_08_09": "End date of the first continuous observation window (2025-06-29 to 2025-08-09, 42 consecutive days). Not the overall dataset max date.",
+    "mid_dataset_gap": "2025-08-11 to 2025-08-16 (6 days) where rolling 7-day rainfall history was incomplete across raw archive boundary, yielding null risk scores.",
+    "second_valid_window": "2025-08-17 to 2025-09-23 (38 consecutive days).",
+    "tail_gap": "2025-09-24 to 2025-09-30 (7 days) where 7-day rolling window calculations extend past dataset end."
+  },
+  "freshness_metadata_precision": {
+    "latest_environmental_observation_date": "2025-09-30",
+    "latest_valid_risk_observation_date": "2025-09-23",
+    "last_available_observation_date": "2025-09-23",
+    "dataset_generated_at": "2026-09-06"
+  },
+  "model_artifact_used": "models/trained/static_susceptibility_model_phase5b.joblib",
+  "offline_behavior": {
+    "offline_mode": true,
+    "external_dependencies": "None",
+    "nasa_smap_imerg_servers_required": false
+  },
+  "system_freshness_semantics": {
+    "freshness_status": "OFFLINE_HISTORICAL_CACHE",
+    "is_live": false,
+    "data_source": "REAL_OBSERVED_PROCESSED"
+  },
+  "map_output_format": "GeoJSON FeatureCollection",
+  "geojson_coordinate_convention": "[longitude, latitude] (WGS84 EPSG:4326)",
+  "demo_endpoint_behavior": "Executes what-if scenario override returning baseline vs simulated score comparison fields",
+  "simulation_safeguards": {
+    "simulation_mode": true,
+    "data_source": "SIMULATED_DEMO",
+    "historical_dataset_mutated": false
+  },
+  "error_handling": {
+    "unknown_site": "404 Not Found",
+    "malformed_or_invalid_params": "422 Unprocessable Entity",
+    "stack_trace_leakage": false
+  },
+  "cors_configuration": {
+    "allowed_origins": [
+      "http://localhost:5173",
+      "http://127.0.0.1:5173",
+      "http://localhost:3000",
+      "http://127.0.0.1:3000"
+    ]
+  },
+  "caching_loading_strategy": "Singleton lazy-loading of Parquet dataframes and joblib model artifacts during service initialization",
+  "pytest_full_suite_results": {
+    "total_tests": 74,
+    "passed": 65,
+    "skipped": 9,
+    "failed": 0
+  },
+  "raw_data_dependent_skipped_tests": [
+    {
+      "test_name": "tests/test_phase6_dynamic_environment.py::test_imerg_discovery_and_metadata",
+      "classification": "EXPECTED_RAW_DATA_DEPENDENCY",
+      "reason": "SKIPPED — raw IMERG archive not included in developer handover (data/raw/rainfall/)"
+    },
+    {
+      "test_name": "tests/test_phase6_dynamic_environment.py::test_imerg_point_extraction_valid",
+      "classification": "EXPECTED_RAW_DATA_DEPENDENCY",
+      "reason": "SKIPPED — raw IMERG archive not included in developer handover (data/raw/rainfall/)"
+    },
+    {
+      "test_name": "tests/test_phase6_dynamic_environment.py::test_imerg_out_of_bounds",
+      "classification": "EXPECTED_RAW_DATA_DEPENDENCY",
+      "reason": "SKIPPED — raw IMERG archive not included in developer handover (data/raw/rainfall/)"
+    },
+    {
+      "test_name": "tests/test_phase6_dynamic_environment.py::test_imerg_rolling_consecutive_window_valid",
+      "classification": "EXPECTED_RAW_DATA_DEPENDENCY",
+      "reason": "SKIPPED — raw IMERG archive not included in developer handover (data/raw/rainfall/)"
+    },
+    {
+      "test_name": "tests/test_phase6_dynamic_environment.py::test_smap_discovery_and_metadata",
+      "classification": "EXPECTED_RAW_DATA_DEPENDENCY",
+      "reason": "SKIPPED — raw SMAP archive not included in developer handover (data/raw/smap/)"
+    },
+    {
+      "test_name": "tests/test_phase6_dynamic_environment.py::test_smap_point_extraction_quality",
+      "classification": "EXPECTED_RAW_DATA_DEPENDENCY",
+      "reason": "SKIPPED — raw SMAP archive not included in developer handover (data/raw/smap/)"
+    },
+    {
+      "test_name": "tests/test_phase6_dynamic_environment.py::test_temporal_alignment_complete",
+      "classification": "EXPECTED_RAW_DATA_DEPENDENCY",
+      "reason": "SKIPPED — raw satellite archives not included in developer handover"
+    },
+    {
+      "test_name": "tests/test_phase6_dynamic_environment.py::test_temporal_alignment_partial",
+      "classification": "EXPECTED_RAW_DATA_DEPENDENCY",
+      "reason": "SKIPPED — raw satellite archives not included in developer handover"
+    },
+    {
+      "test_name": "tests/test_gsi_loader.py",
+      "classification": "DEV_ENVIRONMENT_OPTIONAL_DEPENDENCY",
+      "reason": "SKIPPED — optional geopandas/pymupdf packages not installed in dev handover environment"
+    }
+  ],
+  "report_files_confirmed": [
+    "reports/phase8_backend_report.txt",
+    "reports/phase8_backend_report.json"
+  ],
+  "live_http_verification": {
+    "server": "Uvicorn (127.0.0.1:8000)",
+    "endpoints_verified": "11/11 PASSED",
+    "status_endpoint": "GET /api/v1/system/status -> HTTP 200 OK",
+    "latest_risk_endpoint": "GET /api/v1/risk/latest -> HTTP 200 OK"
+  },
+  "swagger_status": "OPERATIONAL (http://127.0.0.1:8000/docs)",
+  "scientific_terminology_safeguards": [
+    "Susceptibility & risk scores index 0-100",
+    "Never described as exact probabilities or time predictions",
+    "Mandatory regional calibration disclaimer attached to all risk payloads"
+  ],
+  "limitations": [
+    "Prototype operational parameters requiring regional scientific calibration",
+    "Static susceptibility is a spatial predisposition ranking",
+    "Dynamic trigger is an antecedent environmental pressure index"
+  ],
+  "files_created": [
+    "backend/app/schemas/risk_schema.py",
+    "backend/app/services/risk_service.py",
+    "backend/app/api/endpoints.py",
+    "backend/app/main.py",
+    "backend/app/core/config.py",
+    "tests/test_backend.py",
+    "reports/phase8_backend_report.txt",
+    "reports/phase8_backend_report.json"
+  ],
+  "files_modified": [
+    "src/risk/demo_simulation.py",
+    "src/config/settings.py",
+    "src/data/loaders/gsi_loader.py",
+    "tests/test_phase6_dynamic_environment.py",
+    "tests/test_gsi_loader.py",
+    "pytest.ini"
+  ],
+  "final_conclusion": "READY FOR PHASE 9 FRONTEND"
+}

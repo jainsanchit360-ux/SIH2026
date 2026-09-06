@@ -1,0 +1,135 @@
+{
+  "model_name": "RandomForestClassifier",
+  "model_version": "1.0.0",
+  "timestamp": "2026-09-04 01:06:08",
+  "training_dataset": "C:\\Users\\ANSHUMAN SHARMA.LAPTOP-HFGVTEVM\\OneDrive\\Desktop\\ResQtech\\data\\processed\\spatial_susceptibility_dataset.parquet",
+  "total_rows": 22050,
+  "positives": 11025,
+  "background_controls": 11025,
+  "primary_features": [
+    "elevation_m",
+    "slope_deg",
+    "nearest_landslide_distance_m",
+    "historical_count_1km",
+    "historical_count_2km",
+    "historical_count_5km",
+    "historical_count_10km",
+    "unique_historical_count_1km",
+    "unique_historical_count_5km"
+  ],
+  "excluded_features": [
+    "slide_id",
+    "sample_type",
+    "target",
+    "spatial_block_id",
+    "state_clean",
+    "district",
+    "latitude",
+    "longitude",
+    "lat_num",
+    "lon_num",
+    "dem_covered",
+    "elevation_valid",
+    "slope_valid",
+    "dem_tile",
+    "min_distance_to_landslide_m"
+  ],
+  "random_seed": 42,
+  "chosen_threshold": 0.5,
+  "random_split_metrics": {
+    "threshold": 0.5,
+    "accuracy": 0.9238095238095239,
+    "precision": 0.9360709286047597,
+    "recall": 0.909750566893424,
+    "f1": 0.922723091076357,
+    "roc_auc": 0.9810206652577886,
+    "brier_score": 0.05403591779755328,
+    "tn": 2068,
+    "fp": 137,
+    "fn": 199,
+    "tp": 2006,
+    "false_negative_rate": 0.09024943310657596,
+    "false_positive_rate": 0.06213151927437642,
+    "total_samples": 4410,
+    "positives": 2205,
+    "controls": 2205
+  },
+  "spatial_cv_aggregate_metrics": {
+    "accuracy_mean": 0.5214965986394557,
+    "accuracy_std": 0.026863389636984526,
+    "precision_mean": 0.9093259829688869,
+    "precision_std": 0.013019090217853971,
+    "recall_mean": 0.04810161601791378,
+    "recall_std": 0.00874085404731799,
+    "f1_mean": 0.09123458461874115,
+    "f1_std": 0.015823298744091822,
+    "roc_auc_mean": 0.7475968903734369,
+    "roc_auc_std": 0.03767541305148501,
+    "false_negative_rate_mean": 0.9518983839820863,
+    "false_negative_rate_std": 0.008740854047317973,
+    "brier_score_mean": 0.4151302509064032,
+    "brier_score_std": 0.026297014047764678,
+    "oof_global": {
+      "threshold": 0.5,
+      "accuracy": 0.5214965986394557,
+      "precision": 0.9100346020761245,
+      "recall": 0.04770975056689342,
+      "f1": 0.09066620701542705,
+      "roc_auc": 0.7458796036630827,
+      "brier_score": 0.41513025090640315,
+      "tn": 10973,
+      "fp": 52,
+      "fn": 10499,
+      "tp": 526,
+      "false_negative_rate": 0.9522902494331066,
+      "false_positive_rate": 0.00471655328798186,
+      "total_samples": 22050,
+      "positives": 11025,
+      "controls": 11025
+    }
+  },
+  "feature_importances": [
+    {
+      "feature": "nearest_landslide_distance_m",
+      "importance": 0.41369987227754046
+    },
+    {
+      "feature": "historical_count_2km",
+      "importance": 0.1914380451373926
+    },
+    {
+      "feature": "historical_count_1km",
+      "importance": 0.10795111545544207
+    },
+    {
+      "feature": "unique_historical_count_1km",
+      "importance": 0.10151580032273472
+    },
+    {
+      "feature": "historical_count_5km",
+      "importance": 0.052898372119118964
+    },
+    {
+      "feature": "unique_historical_count_5km",
+      "importance": 0.03768147014762855
+    },
+    {
+      "feature": "slope_deg",
+      "importance": 0.03360055082000415
+    },
+    {
+      "feature": "elevation_m",
+      "importance": 0.030683199599737584
+    },
+    {
+      "feature": "historical_count_10km",
+      "importance": 0.030531574120400907
+    }
+  ],
+  "scientific_limitations": [
+    "Class 0 represents background/control locations, not confirmed landslide absence.",
+    "Model estimates static inherent terrain susceptibility only; rainfall and soil moisture are not included.",
+    "Raw latitude/longitude coordinates are excluded to prevent geographic cluster memorization.",
+    "Operational landslide warning thresholds require real-world field calibration."
+  ]
+}
