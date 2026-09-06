@@ -1,0 +1,9 @@
+[project]
+name = "sih2026"
+version = "0.1.0"
+description = "AI-Based Early Warning and Landslide Risk Monitoring System"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.vercel]
+entrypoint = "backend.app.main:app"
